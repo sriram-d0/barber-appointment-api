@@ -1,0 +1,28 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Spring Boot
+application.properties
+application.yml
+application-*.yml
+.env
+
+# Build
+*.jar
+*.war
+*.rar
+*.zip
+
+# OS
+Thumbs.db

@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: barber_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: barber_db
+      MYSQL_USER: barber_user
+      MYSQL_PASSWORD: barber_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - barber_network
+
+  api:
+    build: .
+    container_name: barber_api
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:mysql://mysql:3306/barber_db
+      DB_USERNAME: barber_user
+      DB_PASSWORD: barber_pass
+      JWT_SECRET: your-super-secret-key-change-in-production-minimum-256-bits-long-for-security
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - barber_network
+
+volumes:
+  mysql_data:
+
+networks:
+  barber_network:
+    driver: bridge
