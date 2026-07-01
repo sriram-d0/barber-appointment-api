@@ -6,7 +6,6 @@ A REST API for managing barbershop appointments with role-based access control (
 - **Java 21** with **Spring Boot 3.3**
 - **MySQL 8.0** with JPA/Hibernate
 - **Spring Security** with JWT authentication
-- **Cloudinary** for image management
 - **Docker & Docker Compose** for easy deployment
 - **Maven** for dependency management
 
@@ -14,7 +13,6 @@ A REST API for managing barbershop appointments with role-based access control (
 - ✅ User authentication & registration (Clients, Barbers, Admins)
 - ✅ JWT-based authentication
 - ✅ Appointment booking & cancellation
-- ✅ Image upload to Cloudinary
 - ✅ Role-based access control
 - ✅ API versioning (`/api/v1/`)
 - ✅ Global exception handling with custom error responses
@@ -26,7 +24,6 @@ A REST API for managing barbershop appointments with role-based access control (
 - Java 21+
 - Maven 3.9+
 - Docker & Docker Compose
-- Cloudinary account
 
 ### Setup
 
@@ -39,7 +36,7 @@ A REST API for managing barbershop appointments with role-based access control (
 2. **Configure environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env with your Cloudinary credentials and JWT secret
+   # Edit .env with your JWT secret
    ```
 
 3. **Start MySQL with Docker Compose**
@@ -88,7 +85,7 @@ The API will be available at `http://localhost:8080/api/v1/`
 
 ```
 src/main/java/com/barbershop/
-├── config/                  # Spring configs (Security, JWT, Cloudinary, CORS)
+├── config/                  # Spring configs (Security, JWT, CORS)
 ├── controller/              # REST endpoints (v1)
 ├── service/                 # Business logic
 ├── repository/              # Database access (JPA)
@@ -106,7 +103,6 @@ Edit `src/main/resources/application.yml` to customize:
 - Server port
 - Database connection
 - JWT settings
-- Cloudinary credentials
 
 ## Testing
 
